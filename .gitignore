@@ -1,0 +1,5 @@
+*.pyc
+/home/digital/PycharmProjects/SportActivities/venv
+.idea
+db.sqlite3
+sasdas
