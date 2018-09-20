@@ -1,9 +1,11 @@
 from rest_framework import serializers
-from .models import Json1Test
+from .models import User
+#from rest_auth.registration.serializers import RegisterSerializer
 
 
-class Json1TestSerializer(serializers.ModelSerializer):
+class UserRegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Json1Test
-        fields = ('id', 'name', 'email', 'date', 'subject', 'description')
+        model = User
+        fields = ('username', 'password', 'first_name', 'last_name','height' )
+
