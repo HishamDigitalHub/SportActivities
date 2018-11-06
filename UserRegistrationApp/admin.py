@@ -1,6 +1,53 @@
 from django.contrib import admin
-from .models import UserExtension
+
+from .models import Profile, User, UserPreference
+
 
 # Register your models here.
 
-admin.site.register(UserExtension)
+
+class ProfileAdmin(admin.ModelAdmin):
+    search_fields = ['user__username', 'user__first_name', 'user__last_name']
+    list_display = ['id', 'get_user_id', 'get_user', 'get_first_name', 'get_last_name']
+    # list_display_links = ['id', 'name']
+    # list_filter = ('user_username', 'user__first_name', 'user__last_name')
+
+    def get_user(self, obj):
+        return obj.user.username
+
+    def get_user_id(self, obj):
+        return obj.user.id
+
+    def get_first_name(self, obj):
+        return obj.user.first_name
+
+    def get_last_name(self, obj):
+        return obj.user.last_name
+
+    get_user.short_description = 'UserName'
+    get_user.admin_order_field = 'user__name'
+
+
+class UserPreferenceAdmin(admin.ModelAdmin):
+    search_fields = ['user__username', 'user__first_name', 'user__last_name']
+    list_display = ['id', 'get_user_id', 'get_user', 'get_first_name', 'get_last_name']
+
+    def get_user(self, obj):
+        return obj.user.username
+
+    def get_user_id(self, obj):
+        return obj.user.id
+
+    def get_first_name(self, obj):
+        return obj.user.first_name
+
+    def get_last_name(self, obj):
+        return obj.user.last_name
+
+    get_user.short_description = 'UserName'
+    get_user.admin_order_field = 'user__name'
+
+
+admin.site.register(Profile, ProfileAdmin)
+admin.site.register(UserPreference, UserPreferenceAdmin)
+
