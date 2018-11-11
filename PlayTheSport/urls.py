@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^api/activity/', include(('ActivityApp.urls', 'activities'), namespace='ActivityApp')),
     url(r'^api/venue/', include(('VenueApp.urls', 'venues'), namespace='VenueApp')),
     url(r'^api/team/', include(('TeamApp.urls', 'Teams'), namespace='teams')),
+    url(r'^api/fitness/', include(('FitnessApp.urls', 'Fitness'), namespace='fitness')),
     url(r'^api/profile/', include(('PlayerApp.urls', 'Profile'), namespace='profile')),
     url(r'^api/lookups/', include(('lookup.urls', 'lookups'), namespace='lookups')),
     path('accounts/', include('django.contrib.auth.urls')),

@@ -1,4 +1,6 @@
 from django.contrib import admin
+
+from Global_Functions.admin_panel import AfterSave
 from VenueApp.models import Venue, VenueImage, VenueVideo, VenueRating, VenuePreference
 
 
@@ -10,6 +12,9 @@ class VenueAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'updated_date', 'created_date', 'created_by', 'updated_by']
     list_display_links = ['id', 'name']
     list_filter = ('name',)
+
+    def save_model(self, request, obj, form, change):
+        AfterSave.save_model(self=self, request=request, obj=obj, form=form, change=change)
 
 
 class VenueVideoAdmin(admin.ModelAdmin):
@@ -23,6 +28,9 @@ class VenueVideoAdmin(admin.ModelAdmin):
     get_venue.short_description = 'Venue Name'
     get_venue.admin_order_field = 'venue__name'
 
+    def save_model(self, request, obj, form, change):
+        AfterSave.save_model(self=self, request=request, obj=obj, form=form, change=change)
+
 
 class VenueImageAdmin(admin.ModelAdmin):
     search_fields = ['venue__name']
@@ -34,6 +42,9 @@ class VenueImageAdmin(admin.ModelAdmin):
 
     get_venue.short_description = 'Venue Name'
     get_venue.admin_order_field = 'venue__name'
+
+    def save_model(self, request, obj, form, change):
+        AfterSave.save_model(self=self, request=request, obj=obj, form=form, change=change)
 
 
 class VenueRatingAdmin(admin.ModelAdmin):
@@ -47,6 +58,9 @@ class VenueRatingAdmin(admin.ModelAdmin):
 
     get_venue.short_description = 'Venue Name'
     get_venue.admin_order_field = 'venue__name'
+
+    def save_model(self, request, obj, form, change):
+        AfterSave.save_model(self=self, request=request, obj=obj, form=form, change=change)
 
 
 class VenuePreferenceAdmin(admin.ModelAdmin):
@@ -68,6 +82,9 @@ class VenuePreferenceAdmin(admin.ModelAdmin):
     get_venue_name.short_description = 'Venue Name'
     get_venue_admin_name.short_description = 'Venue Admin Name'
     get_venue_admin_name.admin_order_field = 'get_venue_name'
+
+    def save_model(self, request, obj, form, change):
+        AfterSave.save_model(self=self, request=request, obj=obj, form=form, change=change)
 
 
 admin.site.register(Venue, VenueAdmin)

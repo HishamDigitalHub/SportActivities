@@ -1,4 +1,6 @@
 from django.contrib import admin
+
+from Global_Functions.admin_panel import AfterSave
 from PlayerApp.models import PlayerImage, PlayerVideo
 # Register your models here.
 
@@ -24,6 +26,9 @@ class PlayerVideoAdmin(admin.ModelAdmin):
         return obj.user.username
     get_user.short_description = 'User Name'
 
+    def save_model(self, request, obj, form, change):
+        AfterSave.save_model(self=self, request=request, obj=obj, form=form, change=change)
+
 
 class PlayerImageAdmin(admin.ModelAdmin):
     search_fields = ['team__name']
@@ -40,6 +45,8 @@ class PlayerImageAdmin(admin.ModelAdmin):
         return obj.user.username
     get_user.short_description = 'User Name'
 
+    def save_model(self, request, obj, form, change):
+        AfterSave.save_model(self=self, request=request, obj=obj, form=form, change=change)
 
 admin.site.register(PlayerImage, PlayerImageAdmin)
 admin.site.register(PlayerVideo, PlayerVideoAdmin)

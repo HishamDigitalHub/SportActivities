@@ -1,4 +1,6 @@
 from django.contrib import admin
+
+from Global_Functions.admin_panel import AfterSave
 from TeamApp.models import Team, TeamImage, TeamVideo, TeamInvite, TeamPreference
 
 # Register your models here.
@@ -9,6 +11,9 @@ class TeamAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'updated_date', 'created_date', 'created_by', 'updated_by']
     list_display_links = ['id', 'name']
     list_filter = ('name',)
+
+    def save_model(self, request, obj, form, change):
+        AfterSave.save_model(self=self, request=request, obj=obj, form=form, change=change)
 
 
 class TeamVideoAdmin(admin.ModelAdmin):
@@ -21,6 +26,9 @@ class TeamVideoAdmin(admin.ModelAdmin):
     get_team.short_description = 'Team Name'
     get_team.admin_order_field = 'team__name'
 
+    def save_model(self, request, obj, form, change):
+        AfterSave.save_model(self=self, request=request, obj=obj, form=form, change=change)
+
 
 class TeamImageAdmin(admin.ModelAdmin):
     search_fields = ['team__name']
@@ -31,6 +39,9 @@ class TeamImageAdmin(admin.ModelAdmin):
         return obj.team.name
     get_team.short_description = 'Team Name'
     get_team.admin_order_field = 'team__name'
+
+    def save_model(self, request, obj, form, change):
+        AfterSave.save_model(self=self, request=request, obj=obj, form=form, change=change)
 
 
 class TeamInviteAdmin(admin.ModelAdmin):
@@ -43,6 +54,9 @@ class TeamInviteAdmin(admin.ModelAdmin):
 
     get_team.short_description = 'Team Name'
     get_team.admin_order_field = 'team__name'
+
+    def save_model(self, request, obj, form, change):
+        AfterSave.save_model(self=self, request=request, obj=obj, form=form, change=change)
 
 
 class TeamPreferenceAdmin(admin.ModelAdmin):
@@ -64,6 +78,9 @@ class TeamPreferenceAdmin(admin.ModelAdmin):
     get_team_name.short_description = 'Team Name'
     get_team_admin_name.short_description = 'Team Admin Name'
     get_team_admin_name.admin_order_field = 'get_team_name'
+
+    def save_model(self, request, obj, form, change):
+        AfterSave.save_model(self=self, request=request, obj=obj, form=form, change=change)
 
 
 admin.site.register(Team, TeamAdmin)

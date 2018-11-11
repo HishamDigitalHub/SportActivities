@@ -2,3 +2,8 @@
 /home/digital/PycharmProjects/SportActivities/venv
 .idea
 db.sqlite3
+*.jpg
+*.png
+*.jpeg
+*.mp4
+*.pdf

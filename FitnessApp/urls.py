@@ -12,15 +12,17 @@ from rest_framework import routers
 from FitnessApp.views import (ExerciseImageAPICreateView,
                               ExerciseVideoAPICreateView,
                               ExerciseVideoAPIUpdateView,
-                              ExerciseImageAPIUpdateView)
+                              ExerciseImageAPIUpdateView, ExerciseIconAPICreateView, ExerciseIconAPIUpdateView)
 
 
 urlpatterns = [
                   # path('', include(router.urls)),
                   url(r'^image-upload/$', ExerciseImageAPICreateView.as_view(), name='upload-image'),
                   url(r'^image-upload/(?P<pk>[\w-]+)/update/$', ExerciseImageAPIUpdateView.as_view(), name='upload-image-update'),
-                  url(r'^video-upload/(?P<pk>[\w-]+)/update/$', ExerciseVideoAPIUpdateView.as_view(), name='upload-video-update'),
+                  url(r'^icon-upload/$', ExerciseIconAPICreateView.as_view(), name='upload-icon'),
+                  url(r'^icon-upload/(?P<pk>[\w-]+)/update/$', ExerciseIconAPIUpdateView.as_view(), name='upload-icon-update'),
                   url(r'^video-upload/$', ExerciseVideoAPICreateView.as_view(), name='upload-video'),
+                  url(r'^video-upload/(?P<pk>[\w-]+)/update/$', ExerciseVideoAPIUpdateView.as_view(), name='upload-video-update'),
                   # url(r'^join/invite/$', ActivityInviteCreateAPIView.as_view(), name='invite-join-activity'),
                   # url(r'^my-invitations/$', MyActivityInvitationsAPIView.as_view(), name='list-join-activity-invitations'),
                   # url(r'^my-invitation-request/$', MyInvitationRequestListAPIView.as_view(),

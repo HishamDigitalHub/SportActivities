@@ -32,7 +32,13 @@ class Profile(models.Model):
     public_profile_ind = models.BooleanField(default=True)
     follow_profile_ind = models.BooleanField(default=True)
     type = models.CharField(blank=True, null=True, max_length=1, choices=TYPE_CHOICES)
-    created = models.DateTimeField(auto_now_add=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    created_by = models.ForeignKey(User, related_name='profile_created_by', blank=True, null=True,
+                                   on_delete=models.DO_NOTHING)
+    updated_date = models.DateTimeField(auto_now=True)
+    updated_by = models.ForeignKey(to=User, null=True, related_name='profile_updated_by', blank=True,
+                                   on_delete=models.DO_NOTHING)
 
     def __str__(self):
         full_name = str(self.pk) + ' ' + self.user.first_name + ' ' + self.user.last_name

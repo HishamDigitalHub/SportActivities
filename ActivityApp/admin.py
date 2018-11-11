@@ -4,6 +4,7 @@ from ActivityApp.models import Activity, ActivityImage, ActivityVideo, ActivityI
 
 
 # Register your models here.
+from Global_Functions.admin_panel import AfterSave
 
 
 class ActivityAdmin(admin.ModelAdmin):
@@ -11,6 +12,9 @@ class ActivityAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'updated_date', 'created_date', 'created_by', 'updated_by']
     list_display_links = ['id', 'name']
     list_filter = ('name',)
+
+    def save_model(self, request, obj, form, change):
+        AfterSave.save_model(self=self, request=request, obj=obj, form=form, change=change)
 
 
 class ActivityVideoAdmin(admin.ModelAdmin):
@@ -24,6 +28,8 @@ class ActivityVideoAdmin(admin.ModelAdmin):
     get_activity.short_description = 'Activity Name'
     get_activity.admin_order_field = 'activity__name'
 
+    def save_model(self, request, obj, form, change):
+        AfterSave.save_model(self=self, request=request, obj=obj, form=form, change=change)
 
 class ActivityImageAdmin(admin.ModelAdmin):
     search_fields = ['activity__name']
@@ -35,6 +41,9 @@ class ActivityImageAdmin(admin.ModelAdmin):
 
     get_activity.short_description = 'Activity Name'
     get_activity.admin_order_field = 'activity__name'
+
+    def save_model(self, request, obj, form, change):
+        AfterSave.save_model(self=self, request=request, obj=obj, form=form, change=change)
 
 
 class ActivityRatingAdmin(admin.ModelAdmin):
@@ -49,6 +58,9 @@ class ActivityRatingAdmin(admin.ModelAdmin):
     get_activity.short_description = 'Activity Name'
     get_activity.admin_order_field = 'activity__name'
 
+    def save_model(self, request, obj, form, change):
+        AfterSave.save_model(self=self, request=request, obj=obj, form=form, change=change)
+
 
 class ActivityInviteAdmin(admin.ModelAdmin):
     search_fields = ['activity__name']
@@ -60,6 +72,9 @@ class ActivityInviteAdmin(admin.ModelAdmin):
 
     get_activity.short_description = 'Activity Name'
     get_activity.admin_order_field = 'activity__name'
+
+    def save_model(self, request, obj, form, change):
+        AfterSave.save_model(self=self, request=request, obj=obj, form=form, change=change)
 
 
 class ActivityPreferenceAdmin(admin.ModelAdmin):
@@ -81,6 +96,9 @@ class ActivityPreferenceAdmin(admin.ModelAdmin):
     get_activity_name.short_description = 'Activity Name'
     get_activity_admin_name.short_description = 'Activity Admin Name'
     get_activity_admin_name.admin_order_field = 'get_activity_name'
+
+    def save_model(self, request, obj, form, change):
+        AfterSave.save_model(self=self, request=request, obj=obj, form=form, change=change)
 
 
 admin.site.register(Activity, ActivityAdmin)

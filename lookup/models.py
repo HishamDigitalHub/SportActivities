@@ -9,6 +9,12 @@ from django.contrib.auth.models import User
 class Country(models.Model):
     name = models.CharField(max_length=35)
     icon = models.ImageField(upload_to='country/images/')
+    created_date = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(User, related_name='country_created_by', blank=True, null=True,
+                                   on_delete=models.DO_NOTHING)
+    updated_date = models.DateTimeField(auto_now=True)
+    updated_by = models.ForeignKey(to=User, null=True, related_name='country_updated_by', blank=True,
+                                   on_delete=models.DO_NOTHING)
 
     def save(self, *args, **kwargs):
         self.name = self.name[0].upper() + self.name[1:].lower()
@@ -21,6 +27,12 @@ class Country(models.Model):
 class City(models.Model):
     name = models.CharField(max_length=35)
     country = models.ForeignKey(to=Country, related_name='country_id', on_delete=models.CASCADE)
+    created_date = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(User, related_name='city_created_by', blank=True, null=True,
+                                   on_delete=models.DO_NOTHING)
+    updated_date = models.DateTimeField(auto_now=True)
+    updated_by = models.ForeignKey(to=User, null=True, related_name='city_updated_by', blank=True,
+                                   on_delete=models.DO_NOTHING)
 
     class Meta:
         unique_together = (("name", "country"),)

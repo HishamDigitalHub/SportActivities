@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+from Global_Functions.admin_panel import AfterSave
 from .models import Profile, User, UserPreference
 
 
@@ -27,6 +28,8 @@ class ProfileAdmin(admin.ModelAdmin):
     get_user.short_description = 'UserName'
     get_user.admin_order_field = 'user__name'
 
+    def save_model(self, request, obj, form, change):
+        AfterSave.save_model(self=self, request=request, obj=obj, form=form, change=change)
 
 class UserPreferenceAdmin(admin.ModelAdmin):
     search_fields = ['user__username', 'user__first_name', 'user__last_name']
@@ -47,6 +50,8 @@ class UserPreferenceAdmin(admin.ModelAdmin):
     get_user.short_description = 'UserName'
     get_user.admin_order_field = 'user__name'
 
+    def save_model(self, request, obj, form, change):
+        AfterSave.save_model(self=self, request=request, obj=obj, form=form, change=change)
 
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(UserPreference, UserPreferenceAdmin)
